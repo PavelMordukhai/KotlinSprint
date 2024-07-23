@@ -1,6 +1,6 @@
 package org.example.lesson_01
 
 fun main() {
-    val numberOfOrders: Int = 5
-    val thanksForBuying = "Спасибо за покупку! Ждём вас в будущем!"
+    var numberOfOrders: UInt = 5u
+    val thanksForBuying: String = "Спасибо за покупку! Ждём вас в будущем!"
 }
