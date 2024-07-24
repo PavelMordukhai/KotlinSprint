@@ -17,11 +17,13 @@ fun main() {
     val departureMinute = 39 // минуты отбытия
     val travelTime = 457 // минут в пути
 
-    val travelHour = travelTime / 60
-    val travelMinute = travelTime % 60
+    val travelHour = travelTime / SECONDS_IN_A_MINUTE
+    val travelMinute = travelTime % SECONDS_IN_A_MINUTE
 
-    val arrivalHour = departureHour + travelHour + (departureMinute + travelMinute) / 60 // час прибытия
-    val arrivalMinute = (departureMinute + travelMinute) % 60 // минуты прибытия
+    val arrivalHour = departureHour + travelHour + (departureMinute + travelMinute) / SECONDS_IN_A_MINUTE // час прибытия
+    val arrivalMinute = (departureMinute + travelMinute) % SECONDS_IN_A_MINUTE // минуты прибытия
 
     println("Поезд прибудет в ${String.format("%02d:%02d", arrivalHour, arrivalMinute)}")
 }
+
+const val SECONDS_IN_A_MINUTE = 60
