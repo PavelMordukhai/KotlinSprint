@@ -1,6 +1,7 @@
 package org.example.lesson_02
 
 fun main() {
+
     /*
     Задача 3 к Уроку 2
 
