@@ -13,13 +13,15 @@ package org.example.lesson_03
 
 fun main() {
 
-    val maidenName = "Андреева"
-    val surname = "Сидорова"
+    var surname = "Андреева"
     val name = "Татьяна"
     val patronymic = "Сергеевна"
-    val age = 20
-    val ageOfMarriage = 22
+    var age = 20
 
-    println("$maidenName $name $patronymic, $age")
-    println("$surname $name $patronymic, $ageOfMarriage")
+    println("$surname $name $patronymic, $age")
+
+    surname = "Сидорова"
+    age = 22
+
+    println("$surname $name $patronymic, $age")
 }
