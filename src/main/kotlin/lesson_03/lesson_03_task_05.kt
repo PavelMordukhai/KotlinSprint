@@ -15,13 +15,15 @@ fun main() {
 
     val chessMove = "D2-D4;0" // ход игрока
 
-    var startSpace: String // откуда ходит фигура
-    var endSpace: String // куда ходит фигура
-    var moveNumber: String // номер хода
+    val startSpace: String // откуда ходит фигура
+    val endSpace: String // куда ходит фигура
+    val moveNumber: String // номер хода
 
-    startSpace = chessMove[0].toString() + chessMove[1].toString()
-    endSpace = chessMove[3].toString() + chessMove[4].toString()
-    moveNumber = chessMove[6].toString()
+    val values = chessMove.split("-", ";")
+
+    startSpace = values[0]
+    endSpace = values[1]
+    moveNumber = values[2]
 
     println(startSpace)
     println(endSpace)
