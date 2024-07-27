@@ -6,10 +6,15 @@ fun main() {
 
     val winList: MutableList<String> = mutableListOf()
     var rand = 0
+    var i = 0
 
-    for (i in 1..3) {
+    while (i < 3) {
         rand = Random.nextInt(MIN_NUM, MAX_NUM + 1)
-        winList.add(rand.toString())
+        if (winList.contains(rand.toString()))
+            continue
+        else
+            winList.add(rand.toString())
+        i++
     }
 
     println("\nУгадайте три числа от $MIN_NUM до $MAX_NUM")
