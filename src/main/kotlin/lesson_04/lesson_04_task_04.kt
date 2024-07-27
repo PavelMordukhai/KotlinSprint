@@ -27,18 +27,17 @@ fun main() {
     val group1 = "руки и пресс" // первая группа упражнений
     val group2 = "ноги и спина" // вторая группа упражнений
 
-    val firstTraining = group1 // группа упражнений в первый день
-
+    // вводится пользователем
+    val firstDay = group1 // группа упражнений в первый день
     val dayOfTraining = 5 // номер дня с первого дня упражнений
 
+    val firstGroup = (firstDay == group1)
+    val oddDay = (dayOfTraining % 2 == 1)
+
     println("""
-        Упражнения для рук:    ${(firstTraining == group1 && dayOfTraining % 2 == 1) ||
-                                (firstTraining == group2 && dayOfTraining % 2 == 0)} 
-        Упражнения для ног:    ${(firstTraining == group1 && dayOfTraining % 2 == 0) ||
-                                (firstTraining == group2 && dayOfTraining % 2 == 1)} 
-        Упражнения для спины:  ${(firstTraining == group1 && dayOfTraining % 2 == 0) ||
-                                (firstTraining == group2 && dayOfTraining % 2 == 1)} 
-        Упражнения для пресса: ${(firstTraining == group1 && dayOfTraining % 2 == 1) ||
-                                (firstTraining == group2 && dayOfTraining % 2 == 0)} 
+        Упражнения для рук:    ${(firstGroup && oddDay) || (!firstGroup && !oddDay)} 
+        Упражнения для ног:    ${(firstGroup && !oddDay) || (!firstGroup && oddDay)} 
+        Упражнения для спины:  ${(firstGroup && !oddDay) || (!firstGroup && oddDay)} 
+        Упражнения для пресса: ${(firstGroup && oddDay) || (!firstGroup && !oddDay)} 
     """.trimIndent())
 }
