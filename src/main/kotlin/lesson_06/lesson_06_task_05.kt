@@ -22,18 +22,6 @@ fun main() {
 
         if (answer == firstVal + secondVal) {
             println("\nДобро пожаловать!")
-
-            var count = 0
-            do {
-                if (count++ > 0) println("\nНеверный ввод")
-
-                print("\nВведите логин: ")
-                val userName = readln()
-                print("Введите пароль: ")
-                val password = readln()
-            } while ((userName != newUserName) || (password != newPassword))
-
-            println("\nАвторизация прошла успешно")
             break
 
         } else if (--tries > 0) println("\nПопробуйте ещё раз")
@@ -43,6 +31,18 @@ fun main() {
         println("\nДоступ запрещен")
         return
     }
+
+    var count = 0
+    do {
+        if (count++ > 0) println("\nНеверный ввод")
+
+        print("\nВведите логин: ")
+        val userName = readln()
+        print("Введите пароль: ")
+        val password = readln()
+    } while ((userName != newUserName) || (password != newPassword))
+
+    println("\nАвторизация прошла успешно")
 }
 
 const val MIN_NUM = 1
