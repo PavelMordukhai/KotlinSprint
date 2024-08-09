@@ -1,11 +1,14 @@
 package org.example.lesson_07
 
 fun main() {
+
     val numbers = '0'..'9'
     val lowerCase = 'a'..'z'
     val upperCase = 'A'..'Z'
 
-    val symbols: Array<CharRange> = arrayOf(numbers, lowerCase, upperCase)
+    val symbolTypesArr = arrayOf(numbers, lowerCase, upperCase)
+    val symbols = symbolTypesArr.toMutableList()
+    val symbolTypesCount = symbolTypesArr.size
 
     var password = ""
     var symbol = ""
@@ -18,9 +21,14 @@ fun main() {
         if (passLength < MIN_PASS_LENGTH) println("\nНеверный ввод")
     } while (passLength < MIN_PASS_LENGTH)
 
-    for (i in 1..passLength) {
-        val symbolType: CharRange = symbols.random()
-        symbol = symbolType.random().toString()
+    for (i in 1..(passLength - symbolTypesCount)) {
+        val symbolType = symbolTypesArr.random()
+        symbols.add(symbolType)
+    }
+    symbols.shuffle()
+
+    for (i in symbols) {
+        symbol = i.random().toString()
         password += symbol
     }
 
