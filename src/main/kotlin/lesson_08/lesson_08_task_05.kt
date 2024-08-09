@@ -8,9 +8,9 @@ fun main() {
     val ingredientsArr = Array(numberOfIngredients) { "" }
 
     println()
-    for (i in 1..numberOfIngredients) {
-        print("Введите ингредиент №$i: ")
-        ingredientsArr[i - 1] = readln()
+    for (i in 0..< numberOfIngredients) {
+        print("Введите ингредиент № ${i + 1}: ")
+        ingredientsArr[i] = readln()
     }
 
     println()
