@@ -5,6 +5,7 @@ fun main() {
     val ingredientsArr = arrayOf(
         "картофель", "репчатый лук", "растительное масло", "сливочное масло", "соль", "чёрный молотый перец"
     )
+
     var oldIngredient = ""
     var oldIngredientIndex = 0
 
