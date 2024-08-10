@@ -12,14 +12,14 @@ fun main() {
     print("\nЖелаете добавить еще? (да / нет) ")
     val answer = readln()
 
-    if (answer == "да") {
+    if (answer.equals("да", ignoreCase = true)) {
         print("Какой ингредиент вы хотите добавить? ")
         val newIngredient = readln()
         ingredientsList.add(newIngredient)
     } else return
 
     println("\nТеперь в рецепте есть следующие ингредиенты: ")
-    ingredientsList.forEach { ingredient: String ->
-        println("- $ingredient")
+    ingredientsList.forEach {
+        println("- $it")
     }
 }
