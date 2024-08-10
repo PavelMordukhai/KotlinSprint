@@ -8,7 +8,7 @@ fun main() {
     )
 
     println("В рецепте есть следующие ингредиенты: ")
-    ingredientsList.forEach { ingredient: String ->
-        println("- $ingredient")
+    ingredientsList.forEach {
+        println("- $it")
     }
 }
