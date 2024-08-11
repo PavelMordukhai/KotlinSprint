@@ -7,7 +7,7 @@ fun main() {
     )
 
     var oldIngredient = ""
-    var oldIngredientIndex = 0
+    var oldIngredientIndex = -1
 
     println("Список ингредиентов: ")
     for (i in ingredientsArr) println("- $i")
@@ -15,15 +15,12 @@ fun main() {
     print("\nНапишите, какой ингредиент вы хотите заменить: ")
     do {
         oldIngredient = readln()
-        if (oldIngredient in ingredientsArr) {
-            oldIngredientIndex = ingredientsArr.indexOf(oldIngredient)
-            break
-        }
-        else {
+        oldIngredientIndex = ingredientsArr.indexOf(oldIngredient)
+        if (oldIngredientIndex == -1) {
             print("\nТакого ингредиента в рецепте нет. Повторите ввод: ")
             continue
         }
-    } while (true)
+    } while (oldIngredientIndex == -1)
 
     print("\nНапишите новый ингредиент, на который происходит замена: ")
     val newIngredient = readln()
