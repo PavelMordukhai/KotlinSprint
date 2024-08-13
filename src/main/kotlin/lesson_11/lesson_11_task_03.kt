@@ -50,32 +50,4 @@ fun main() {
             "микрофон выключен", "микрофон выключен"
         ),
     )
-
-    // TEST
-
-    printInformation(roomOne)
-
-    val newMember: RoomMember = RoomMember("Qwerty", "Qwerty.jpg")
-    roomOne.addMember(newMember)
-    printInformation(roomOne)
-
-    roomOne.updateMemberStatus("Петя", "разговаривает")
-    printInformation(roomOne)
-
-    roomOne.updateMemberStatus("Петя", "молчит")
-    printInformation(roomOne)
-
-    roomOne.updateMemberStatus("Миша", "разговаривает")
-    printInformation(roomOne)
-
-    roomOne.updateMemberStatus("Миша", "молчит")
-    printInformation(roomOne)
-}
-
-
-fun printInformation(roomOne: Room) {
-    println(roomOne.nicknamesList)
-    println(roomOne.avatarsList)
-    println(roomOne.statusesList)
-    println()
 }
