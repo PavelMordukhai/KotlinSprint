@@ -1,6 +1,9 @@
 package org.example.lesson_11
 
 class RecipeCategory(
+    val categoryId: Int,
+    val categoryTitle: String,
+    val categoryImageUrl: String,
     val categoryName: String,
     val categoryDescription: String,
 ) {
@@ -12,6 +15,9 @@ class RecipeCategory(
 
 
 class Recipe(
+    val recipeId: Int,
+    val recipeTitle: String,
+    val recipeImageUrl: String,
     val dishName: String,
     val ingredients: MutableList<String>,
     val cookingMethod: String,
