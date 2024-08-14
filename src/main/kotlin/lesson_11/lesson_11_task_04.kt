@@ -19,7 +19,7 @@ class Recipe(
     val recipeTitle: String,
     val recipeImageUrl: String,
     val dishName: String,
-    val ingredients: MutableList<String>,
+    val ingredients: MutableList<Ingredient>,
     val cookingMethod: String,
 ) {
     private var inFavorites: Boolean = false
