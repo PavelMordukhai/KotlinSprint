@@ -4,17 +4,8 @@ package org.example.lesson_13
 class PhoneBookContact4(
     val name: String,
     val phoneNumber: Long,
+    val company: String? = null,
 ) {
-    private var company: String? = null
-
-    constructor(
-        name: String,
-        phoneNumber: Long,
-        company: String?,
-    ) : this(name, phoneNumber) {
-        this.company = company
-    }
-
     fun printContactInfo() {
         println("- Имя: $name\n- Номер: $phoneNumber\n- Компания: ${company ?: "не указано"}")
     }
@@ -27,6 +18,8 @@ val answer = listOf("да", "д", "lf", "l")
 
 
 fun main() {
+    println("Заполните информацию")
+
     while (true) {
         println("\nКонтакт № $count:")
 
@@ -39,6 +32,7 @@ fun main() {
         if (createNewContact() in answer) continue else break
     }
 
+    println("\nСписок контактов: ")
     for (i in contactsList.indices) {
         println("\nКонтакт № ${i + 1}:")
         contactsList[i].printContactInfo()
