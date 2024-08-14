@@ -4,16 +4,8 @@ package org.example.lesson_13
 class PhoneBookContact2(
     val name: String,
     val phoneNumber: Long,
+    val company: String? = null,
 ) {
-    var company: String? = null
-
-    constructor(
-        name: String,
-        phoneNumber: Long,
-        company: String?,
-    ) : this(name, phoneNumber) {
-        this.company = company
-    }
 
     fun printContactInfo() {
         println("- Имя: $name\n- Номер: $phoneNumber\n- Компания: ${company ?: "не указано"}")
