@@ -25,26 +25,12 @@ class WeatherOfDay5(
 
 fun main() {
 
-    val weatherDataList: MutableList<WeatherOfDay5> = mutableListOf()
+    val weatherDataList = getWeatherDataList()
 
     val daytimeTempList: MutableList<Int> = mutableListOf()
     val nightTempList: MutableList<Int> = mutableListOf()
 
     val precipitationDays: MutableList<Int> = mutableListOf()
-
-    repeat(NUMBER_OF_DAYS) {
-        val daytimeTemp = Random.nextInt(25..35)
-        val nightTemp = Random.nextInt(15..25)
-        val isPrecipitation = Random.nextBoolean()
-
-        weatherDataList.add(
-            WeatherOfDay5(
-                daytimeTemp = daytimeTemp,
-                nightTemp = nightTemp,
-                isPrecipitation = isPrecipitation
-            )
-        )
-    }
 
     for (item in weatherDataList) {
 
@@ -72,6 +58,27 @@ fun main() {
     println()
     println("Даты дней с осадками: ${precipitationDays.joinToString()}")
     println("Количество дней с осадками: $countPrecipitationDays")
+}
+
+
+fun getWeatherDataList(): List<WeatherOfDay5> {
+    val weatherDataList: MutableList<WeatherOfDay5> = mutableListOf()
+
+    repeat(NUMBER_OF_DAYS) {
+        val daytimeTemp = Random.nextInt(25..35)
+        val nightTemp = Random.nextInt(15..25)
+        val isPrecipitation = Random.nextBoolean()
+
+        weatherDataList.add(
+            WeatherOfDay5(
+                daytimeTemp = daytimeTemp,
+                nightTemp = nightTemp,
+                isPrecipitation = isPrecipitation
+            )
+        )
+    }
+
+    return weatherDataList
 }
 
 
