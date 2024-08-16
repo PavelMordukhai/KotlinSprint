@@ -11,12 +11,18 @@ open class Liner(
 
 class CargoShip(
     name: String,
-) : Liner(name, speed = 20, cargoCapacity = 60000, passengerCapacity = 50)
+    speed: Int = 20,
+    cargoCapacity: Int = 60000,
+    passengerCapacity: Int = 50,
+) : Liner(name, speed, cargoCapacity, passengerCapacity)
 
 
 class Icebreaker(
     name: String,
-) : Liner(name, speed = 15, cargoCapacity = 5000, passengerCapacity = 30) {
+    speed: Int = 15,
+    cargoCapacity: Int = 5000,
+    passengerCapacity: Int = 30,
+) : Liner(name, speed, cargoCapacity, passengerCapacity) {
 
     fun breakIce() {
         println("Ледокол ломает лёд")
