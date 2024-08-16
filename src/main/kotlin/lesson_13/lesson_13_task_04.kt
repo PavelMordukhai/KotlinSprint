@@ -24,12 +24,17 @@ fun main() {
         println("\nКонтакт № $count:")
 
         val name = enterName()
-        val phoneNumber = enterPhoneNumber() ?: if (createNewContact() in answer) continue else break
-        val company = enterCompany()
+        val phoneNumber = enterPhoneNumber()
 
-        addContactToList(name = name, phoneNumber = phoneNumber, company = company)
-        count++
-        if (createNewContact() in answer) continue else break
+        if (phoneNumber != null) {
+            val company = enterCompany()
+
+            addContactToList(name = name, phoneNumber = phoneNumber, company = company)
+            count++
+        }
+
+        if (createNewContact() !in answer)
+            break
     }
 
     println("\nСписок контактов: ")
