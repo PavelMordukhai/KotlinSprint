@@ -64,8 +64,8 @@ fun main() {
     chat1.messageList = mutableListOf(
         Message(1, "message 1", "a1"),
         Message(2, "message 2", "a2"),
-        Message(3, "message 4", "a4"),
-        Message(4, "message 7", "a7"),
+        Message(3, "message 3", "a4"),
+        Message(4, "message 4", "a7"),
     )
 
     chat1.threadMessageList = mutableListOf(
@@ -77,28 +77,3 @@ fun main() {
     chat1.printChat()
     println()
 }
-
-
-/*
-Вывод:
-
-message 1
-message 2
-	parent message 2-1
-message 4
-	parent message 3-1
-	parent message 3-2
-message 7
-
-Нужно:
-
-message 1
-message 2
-	parent message 2-1
-message 3
-	parent message 3-1
-	parent message 3-2
-message 4
- */
-
-
