@@ -1,86 +1,60 @@
 package org.example.lesson_14
 
-/*
-Задача 5* к Уроку 14
-
-Создай класс Chat, который реализует обсуждение в мессенджере, аналогичному Discord.
-Класс должен иметь следующие методы:
-
-- addMessage() — добавляет обычное сообщение в чат, принимает на вход текст и автора сообщения;
-- addThreadMessage() — добавляет сообщение в тред к предыдущему сообщению (для начала обсуждения),
-дополнительно принимает на вход parentMessageId для идентификации сообщения,
-под которым создается ветка обсуждения;
-
-Сообщения чата должны храниться в списке, в классе Chat.
-Для создания сообщений соответствующих типов
-используй классы Message и ChildMessage в соответствующей иерархии.
-У каждого типа сообщения должен быть id.
-
-- printChat() — печатает все сообщения чата.
-Если создано дочернее сообщение, необходимо применить для вывода табуляцию
-и печатать его под родительским сообщением.
-Используй groupBy() для группировки сообщений по parentMessageId,
-если сообщение является экземпляром ChildMessage, или по id если это обычное сообщение.
- */
-
 
 open class Chat() {
 
     var messageList: MutableList<Message> = mutableListOf()
+    var threadMessageList: MutableList<ChildMessage> = mutableListOf()
 
     fun addMessage(
+        id: Int,
         messageText: String,
         messageAuthor: String
     ) {
-        messageList.add(Message(messageText, messageAuthor))
+        messageList.add(Message(id, messageText, messageAuthor))
     }
 
     fun addThreadMessage(
+        parentMessageId: Int,
+        id: Int,
         messageText: String,
         messageAuthor: String,
-        parentMessageId: Int
+
     ) {
-        messageList.add(ChildMessage(messageText, messageAuthor))
+        threadMessageList.add(ChildMessage(parentMessageId, id, messageText, messageAuthor))
     }
 
     fun printChat() {
 
-        for (i in messageList) {
-            when (i.id) {
-                2 -> println("\t${i.messageText}")
-                else -> println(i.messageText)
+        val threadsIdMap = threadMessageList.groupBy ({ it.parentMessageId }) {it.messageText}
+
+        for (messageID in messageList.indices) {
+            println((messageList[messageID]).messageText)
+
+            for (pmID in threadsIdMap.keys) {
+                if (pmID == messageID + 1) {
+                    for (parentMessage in threadsIdMap[pmID]!!)
+                        println("\t$parentMessage")
+                }
             }
-        }
-        println()
-
-        //
-        val idMap = messageList.groupBy { it.id }
-
-        for (id in idMap) {
-            println(id.key)
-            for (message in id.value)
-                println(message.messageText)
         }
     }
 }
 
 
 open class Message(
+    var id: Int = 1,
     val messageText: String,
     val messageAuthor: String,
-) : Chat() {
-
-    open val id: Int = 1
-}
+    ) : Chat()
 
 
 class ChildMessage(
+    var parentMessageId: Int,
+    id: Int = 1,
     messageText: String,
     messageAuthor: String,
-) : Message(messageText, messageAuthor) {
-
-    override val id: Int = 2
-}
+) : Message(id, messageText, messageAuthor)
 
 
 fun main() {
@@ -88,24 +62,43 @@ fun main() {
     val chat1 = Chat()
 
     chat1.messageList = mutableListOf(
-        Message("qqq1", "a1"),
-        Message("qqq2", "a2"),
-        ChildMessage("qqq3", "a3"),
-        Message("qqq4", "a4"),
-        ChildMessage("qqq5", "a5"),
-        ChildMessage("qqq6", "a6"),
-        Message("qqq7", "a7"),
+        Message(1, "message 1", "a1"),
+        Message(2, "message 2", "a2"),
+        Message(3, "message 4", "a4"),
+        Message(4, "message 7", "a7"),
+    )
+
+    chat1.threadMessageList = mutableListOf(
+        ChildMessage(2, 1, "parent message 2-1", "a3"),
+        ChildMessage(3, 1, "parent message 3-1", "a5"),
+        ChildMessage(3, 2, "parent message 3-2", "a6"),
     )
 
     chat1.printChat()
     println()
-
-//    val message1 = Message("qqq1", "qqas der fgt")
-//    val message2 = Message("qqq2", "der fgt hyu")
-//    val message3 = ChildMessage("qqq3", "fgt nhy")
-//    val message4 = Message("qqq4", "qqas der fgt")
-//    val message5 = ChildMessage("qqq5", "der fgt hyu")
-//    val message6 = ChildMessage("qqq6", "der fgt hyu")
-//    val message7 = Message("qqq7", "der fgt hyu")
-
 }
+
+
+/*
+Вывод:
+
+message 1
+message 2
+	parent message 2-1
+message 4
+	parent message 3-1
+	parent message 3-2
+message 7
+
+Нужно:
+
+message 1
+message 2
+	parent message 2-1
+message 3
+	parent message 3-1
+	parent message 3-2
+message 4
+ */
+
+
