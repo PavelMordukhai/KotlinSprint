@@ -14,27 +14,31 @@ class PrecipitationAmount(
 ) : WeatherStationStats()
 
 
-class WeatherServer(val message: WeatherStationStats) {
+class WeatherServer {
 
-    fun getType() {
+    fun sendMessage(message: WeatherStationStats): String {
 
-        if (message is Temperature)
-            println("Температура равна ${message.temperature} ${'\u2103'}")
-
-        if (message is PrecipitationAmount)
-            println("Количество осадков: ${message.precipitationAmount} мм")
+        val textData = when(message) {
+            is Temperature -> "Температура равна ${message.temperature} ${'\u2103'}"
+            is PrecipitationAmount -> "Количество осадков: ${message.precipitationAmount} мм"
+            else -> "Прочие данные"
+        }
+        return textData
     }
 }
 
 
 fun main() {
 
-    val temperature1 = Temperature(20)
-    val precipitationAmount1 = PrecipitationAmount(50)
+    val object1 = Temperature(20)
+    val object2 = PrecipitationAmount(50)
 
-    val messageToServer1 = WeatherServer(temperature1)
-    val messageToServer2 = WeatherServer(precipitationAmount1)
+    val messageToServer1 = WeatherServer()
+    val messageToServer2 = WeatherServer()
 
-    messageToServer1.getType()
-    messageToServer2.getType()
+    val data1 = messageToServer1.sendMessage(object1)
+    val data2 = messageToServer2.sendMessage(object2)
+
+    println(data1)
+    println(data2)
 }
