@@ -8,12 +8,16 @@ interface Movement {
 
 
 interface PassengerTransportation {
+    val numberOfPassengers: Int
+
     fun loadPassenger()
     fun unloadPassenger()
 }
 
 
 interface CargoTransportation {
+    val numberOfTons: Int
+
     fun loadCargo()
     fun unloadCargo()
 }
@@ -21,7 +25,7 @@ interface CargoTransportation {
 
 class Car(
     val name: String,
-    var numberOfPassengers: Int
+    override var numberOfPassengers: Int,
 ) : Movement, PassengerTransportation {
 
     override fun moveTo() {
@@ -44,12 +48,9 @@ class Car(
 
 class Truck(
     val name: String,
-    var numberOfTons: Int,
-
-
-) : Movement, PassengerTransportation, CargoTransportation {
-
-    val numberOfPassengers: Int = 1
+    override var numberOfPassengers: Int,
+    override var numberOfTons: Int,
+    ) : Movement, PassengerTransportation, CargoTransportation {
 
     override fun moveTo() {
         println("Грузовой автомобиль $name уехал")
@@ -83,7 +84,7 @@ fun main() {
     var cargo = 0
 
     val car1 = Car("Audi", 3)
-    val truck1 = Truck("Ford", 2)
+    val truck1 = Truck("Ford", 1, 2)
 
     println()
     truck1.loadPassenger()
