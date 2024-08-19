@@ -2,7 +2,7 @@ package org.example.lesson_16
 
 
 class User(
-    val login: String,
+    private val login: String,
     private val password: String,
 ) {
     fun validatePassword(password: String) = (password == this.password)
