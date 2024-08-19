@@ -1,13 +1,14 @@
 package org.example.lesson_16
 
+import kotlin.math.pow
+
+private const val PI = 3.14
 
 class Circle(
     private val radius: Double
 ) {
-    private val pi = 3.14
-
-    fun getCircumference() = 2 * pi * radius
-    fun getArea() = pi * radius * radius
+    fun getCircumference() = 2 * PI * radius
+    fun getArea() = PI * radius.pow(2)
 }
 
 
