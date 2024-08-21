@@ -1,6 +1,5 @@
 package org.example.lesson_17
 
-
 class Package(
     val number: Int,
     location: String,
@@ -18,9 +17,7 @@ class Package(
         }
 }
 
-
 fun main() {
-
     val package1 = Package(1, "location-1")
 
     package1.location = "location-1-1"
