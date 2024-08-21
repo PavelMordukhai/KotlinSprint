@@ -1,11 +1,9 @@
 package org.example.lesson_17
 
-
 class User(
     login: String,
     password: String,
 ) {
-
     var login = login
         set(value) {
             field = value
@@ -21,14 +19,11 @@ class User(
             return str
         }
         set(value) {
-            field = password
             println("Вы не можете изменить пароль")
         }
 }
 
-
 fun main() {
-
     val user1 = User("qwerty", "asdfgGFDSA")
 
     user1.password = "seven"
