@@ -1,6 +1,5 @@
 package org.example.lesson_17
 
-
 class Folder(
     name: String,
     numberOfFiles: Int = 0,
@@ -21,9 +20,7 @@ class Folder(
         }
 }
 
-
 fun main() {
-
     val folder1 = Folder("documents", 50, true)
     println(folder1.name)
     println(folder1.numberOfFiles)
