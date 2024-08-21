@@ -1,6 +1,5 @@
 package org.example.lesson_17
 
-
 class Ship(
     name: String,
     private var averageSpeed: Int,
@@ -8,11 +7,9 @@ class Ship(
 ) {
     var name = name
         set(value) {
-            field = name
             println("Имя корабля менять нельзя")
         }
 }
-
 
 fun main() {
     val ship1 = Ship("Беда", 11, "Морской Фасад")
