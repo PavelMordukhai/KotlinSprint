@@ -1,6 +1,5 @@
 package org.example.lesson_17
 
-
 class QuizQuestionAndAnswer(
     question: String,
     answer: String,
@@ -14,7 +13,6 @@ class QuizQuestionAndAnswer(
             field = value
         }
 }
-
 
 fun main() {
 
