@@ -4,28 +4,30 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 abstract class Dice {
-    abstract fun getNumber(): String
+    abstract val numberOfSides: Int
+    fun getNumber(): Int = Random.nextInt(1..numberOfSides)
+    abstract fun printResult()
 }
 
 class FourSidedDice : Dice() {
-    private val numberOfSides: Int = 4
-    private val number = Random.nextInt(1..numberOfSides)
-
-    override fun getNumber() = "На четырёхгранной кости выпало число $number"
+    override val numberOfSides: Int = 4
+    override fun printResult() {
+        println("На четырёхгранной кости выпало число ${getNumber()}")
+    }
 }
 
 class SixSidedDice : Dice() {
-    private val numberOfSides: Int = 6
-    private val number = Random.nextInt(1..numberOfSides)
-
-    override fun getNumber() = "На шестигранной кости выпало число $number"
+    override val numberOfSides: Int = 6
+    override fun printResult() {
+        println("На шестигранной кости выпало число ${getNumber()}")
+    }
 }
 
 class EightSidedDice : Dice() {
-    private val numberOfSides: Int = 8
-    private val number = Random.nextInt(1..numberOfSides)
-
-    override fun getNumber() = "На восьмигранной кости выпало число $number"
+    override val numberOfSides: Int = 8
+    override fun printResult() {
+        println("На восьмигранной кости выпало число ${getNumber()}")
+    }
 }
 
 fun main() {
@@ -36,7 +38,11 @@ fun main() {
     val listOfDice: List<Dice> = listOf(dice4, dice6, dice8)
 
     listOfDice.forEach {
+        it.printResult()
+    }
+
+    // Вывод без текста
+    listOfDice.forEach {
         println(it.getNumber())
-        println()
     }
 }
