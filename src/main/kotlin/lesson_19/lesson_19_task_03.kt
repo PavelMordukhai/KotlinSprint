@@ -3,7 +3,7 @@ package org.example.lesson_19
 class Spaceship {
 
     fun takeOff() {
-        TODO("Здесь нужна информация о дополнительной логике")
+        // TODO("Здесь нужна информация о дополнительной логике")
     }
 
     fun land() {
@@ -18,4 +18,5 @@ class Spaceship {
 fun main() {
     val spaceship = Spaceship()
     spaceship.takeOff()
+    spaceship.land()
 }
