@@ -1,23 +1,15 @@
 package org.example.lesson_19
 
 enum class CategoryOfProducts {
-    CLOTHES {
-        override fun getCategoryName(): String {
-            return "одежда"
-        }
-    },
-    STATIONERY {
-        override fun getCategoryName(): String {
-            return "канцелярские товары"
-        }
-    },
-    OTHER {
-        override fun getCategoryName(): String {
-            return "разное"
-        }
-    };
+    CLOTHING,
+    STATIONERY,
+    MISC;
 
-    abstract fun getCategoryName(): String
+    fun getCategoryName() = when(this) {
+        CLOTHING -> "одежда"
+        STATIONERY -> "канцелярские товары"
+        MISC -> "разное"
+    }
 }
 
 class Product(
