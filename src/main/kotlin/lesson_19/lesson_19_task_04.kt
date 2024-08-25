@@ -1,155 +1,91 @@
 package org.example.lesson_19
 
 enum class TypesOfProjectile(
-    val id: Int,
     val type: String,
     val attackPower: Int
 ) {
-    BLUE_PROJECTILE( 1, "Синий", 5),
-    GREEN_PROJECTILE(2, "Зелёный", 10),
-    RED_PROJECTILE(3, "Красный", 20),
+    BLUE_PROJECTILE("Синий", 5),
+    GREEN_PROJECTILE("Зелёный", 10),
+    RED_PROJECTILE("Красный", 20),
 }
 
 class Tank {
     private val projectileList: MutableList<TypesOfProjectile> = mutableListOf()
+    private var isLoaded = false
+    private var currentProjectile: TypesOfProjectile? = null
 
     init {
-        println("\nВы в танке. У вас пока нет снарядов")
+        println("Вы в танке. У вас пока нет снарядов.")
     }
 
-    // варианты выбора
-    fun choices(): Int {
-        do {
-            when (val number = readln()) {
-                "0", "1", "2", "3" -> return number.toInt()
-                else -> print("Повторите ввод (0, 1, 2, 3): ")
-            }
-        } while (true)
-    }
-
-    // выбор действия
-    fun chooseAction() {
-        print("""
-            
-            Выберите действие:
-            1 - подобрать снаряд;
-            2 - зарядить пушку;
-            3 - выстрелить;
-            0 - покинуть танк
-            Твой выбор: 
-        """.trimIndent())
-    }
-
-    // выбор типа подбираемого снаряда
-    fun chooseTypeOfProjectile() {
-        print("""
-            
-            Какой снаряд хотите подобрать?
-            1 - синий;
-            2 - зелёный;
-            3 - красный;
-            0 - главное меню
-            Твой выбор: 
-        """.trimIndent())
-    }
-
-    // добавить подобранный снаряд в список
-    fun addProjectileToList(number: Int) {
-        for (value in TypesOfProjectile.entries) {
-            if (value.id == number) {
-                projectileList.add(value)
-                println("\nВы подобрали ${value.type} тип снаряда.")
-                break
-            }
-        }
-    }
-
-    // проверить наличие снарядов
-    fun checkProjectileList() = projectileList.isEmpty()
-
-    // выбор типа заряжаемого снаряда
-    fun chooseTypeOfProjectileToLoad() {
-        print("""
-            
-            Какой снаряд хотите использовать?
-            1 - синий;
-            2 - зелёный;
-            3 - красный;
-            0 - главное меню
-            Твой выбор: 
-        """.trimIndent())
-    }
-
-    // проверка наличия типа снаряда
-    fun checkProjectile(number: Int): TypesOfProjectile? {
-        if (number == 0)
-            return null
-        for (value in projectileList) {
-            if (value.id == number) {
-                println("\nВы выбрали ${value.type} тип снаряда.")
-                return value
-            }
-        }
-        print("\nТакого снаряда нет в наличии\n")
-        return null
+    // подобрать снаряд
+    fun pickUpProjectile(projectile: TypesOfProjectile) {
+        println("Вы подобрали ${projectile.type} тип снаряда.")
+        projectileList.add(projectile)
     }
 
     // зарядить пушку
     fun load(projectile: TypesOfProjectile) {
-        projectileList.remove(projectile)
-        println("Пушка заряжена")
+        if (isLoaded) {
+            println("Вы выбрали ${projectile.type} тип снаряда.")
+            println("Но пушка уже заряжена.")
+            return
+        }
+        if (projectile in projectileList) {
+            projectileList.remove(projectile)
+            isLoaded = true
+            currentProjectile = projectile
+            println("Вы выбрали ${projectile.type} тип снаряда.")
+            println("Пушка заряжена.")
+        } else {
+            println("Вы выбрали ${projectile.type} тип снаряда.")
+            println("Но такого снаряда нет в наличии.")
+            println("Пушка не заряжена.")
+        }
     }
 
     // выстрелить
-    fun shoot(isLoaded: Boolean = false, typeOfProjectile: TypesOfProjectile?) {
-        if (isLoaded) {
-            println("\nПроизведён выстрел!")
-            if (typeOfProjectile != null) {
-                println("Нанесённый урон = ${typeOfProjectile.attackPower}")
-            }
-        } else
-            println("\nПушка не заряжена")
+    fun shoot() {
+        if (isLoaded && currentProjectile != null) {
+            println("Произведён выстрел!")
+            println("Нанесённый урон = ${currentProjectile?.attackPower}.")
+            isLoaded = false
+            currentProjectile = null
+        } else {
+            println("Вы пытаетесь выстрелить, но пушка не заряжена.")
+            isLoaded = false
+            currentProjectile = null
+        }
     }
 }
 
 fun main() {
     val tank = Tank()
-    var isLoaded = false
-    var currentProjectile: TypesOfProjectile? = null
+    println()
 
-    while (true) {
-        tank.chooseAction()
-        val choice = tank.choices()
-        when (choice) {
-            0 -> {
-                println("\nВы покинули танк")
-                return
-            }
-            1 -> {
-                tank.chooseTypeOfProjectile()
-                val typeOfProjectile = tank.choices()
-                tank.addProjectileToList(typeOfProjectile)
-                continue
-            }
-            2 -> {
-                if (isLoaded) {
-                    println("\nПушка уже заряжена")
-                    continue
-                }
-                if (tank.checkProjectileList()) {
-                    println("\nУ вас нет снарядов")
-                    continue
-                }
-                tank.chooseTypeOfProjectileToLoad()
-                val projectileToLoad = tank.choices()
-                currentProjectile = tank.checkProjectile(projectileToLoad) ?: continue
-                tank.load(currentProjectile)
-                isLoaded = true
-            }
-            3 -> {
-                tank.shoot(isLoaded, currentProjectile)
-                isLoaded = false
-            }
-        }
-    }
+    tank.shoot()
+    println()
+
+    tank.pickUpProjectile(TypesOfProjectile.BLUE_PROJECTILE)
+    tank.pickUpProjectile(TypesOfProjectile.GREEN_PROJECTILE)
+    tank.pickUpProjectile(TypesOfProjectile.RED_PROJECTILE)
+    println()
+
+    tank.load(TypesOfProjectile.BLUE_PROJECTILE)
+    println()
+    tank.load(TypesOfProjectile.GREEN_PROJECTILE)
+    println()
+    tank.shoot()
+    println()
+
+    tank.load(TypesOfProjectile.BLUE_PROJECTILE)
+    println()
+    tank.load(TypesOfProjectile.GREEN_PROJECTILE)
+    println()
+    tank.shoot()
+    println()
+
+    tank.load(TypesOfProjectile.RED_PROJECTILE)
+    println()
+    tank.shoot()
 }
