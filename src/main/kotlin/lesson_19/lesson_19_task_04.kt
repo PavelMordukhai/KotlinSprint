@@ -9,83 +9,57 @@ enum class TypesOfProjectile(
     RED_PROJECTILE("Красный", 20),
 }
 
-class Tank {
-    private val projectileList: MutableList<TypesOfProjectile> = mutableListOf()
-    private var isLoaded = false
+class Tank(
     private var currentProjectile: TypesOfProjectile? = null
+) {
+    private var isLoaded = false
 
     init {
-        println("Вы в танке. У вас пока нет снарядов.")
+        if (currentProjectile == null)
+            println("Вы в танке. Пушка не заряжена.")
+        else {
+            isLoaded = true
+            println("Вы в танке. Пушка заряжена. Тип снаряда - ${currentProjectile?.type}")
+        }
     }
 
-    // подобрать снаряд
-    fun pickUpProjectile(projectile: TypesOfProjectile) {
-        println("Вы подобрали ${projectile.type} тип снаряда.")
-        projectileList.add(projectile)
-    }
-
-    // зарядить пушку
-    fun load(projectile: TypesOfProjectile) {
+    fun loadCannon(projectile: TypesOfProjectile) {
         if (isLoaded) {
-            println("Вы выбрали ${projectile.type} тип снаряда.")
-            println("Но пушка уже заряжена.")
+            println("Вы не можете зарядить пушку.")
+            println("Она уже заряжена. Тип снаряда - ${currentProjectile?.type}")
             return
         }
-        if (projectile in projectileList) {
-            projectileList.remove(projectile)
-            isLoaded = true
-            currentProjectile = projectile
-            println("Вы выбрали ${projectile.type} тип снаряда.")
-            println("Пушка заряжена.")
-        } else {
-            println("Вы выбрали ${projectile.type} тип снаряда.")
-            println("Но такого снаряда нет в наличии.")
-            println("Пушка не заряжена.")
-        }
+        isLoaded = true
+        currentProjectile = projectile
+        println("Пушка заряжена. Тип снаряда - ${projectile.type}")
     }
 
-    // выстрелить
     fun shoot() {
-        if (isLoaded && currentProjectile != null) {
+        if (isLoaded) {
             println("Произведён выстрел!")
             println("Нанесённый урон = ${currentProjectile?.attackPower}.")
             isLoaded = false
             currentProjectile = null
         } else {
-            println("Вы пытаетесь выстрелить, но пушка не заряжена.")
-            isLoaded = false
-            currentProjectile = null
+            println("Вы не можете выстрелить. Пушка не заряжена.")
         }
     }
 }
 
 fun main() {
-    val tank = Tank()
+    val tank = Tank(TypesOfProjectile.BLUE_PROJECTILE)
     println()
-
-    tank.shoot()
-    println()
-
-    tank.pickUpProjectile(TypesOfProjectile.BLUE_PROJECTILE)
-    tank.pickUpProjectile(TypesOfProjectile.GREEN_PROJECTILE)
-    tank.pickUpProjectile(TypesOfProjectile.RED_PROJECTILE)
-    println()
-
-    tank.load(TypesOfProjectile.BLUE_PROJECTILE)
-    println()
-    tank.load(TypesOfProjectile.GREEN_PROJECTILE)
+    tank.loadCannon(TypesOfProjectile.GREEN_PROJECTILE)
     println()
     tank.shoot()
     println()
-
-    tank.load(TypesOfProjectile.BLUE_PROJECTILE)
+    tank.shoot()
     println()
-    tank.load(TypesOfProjectile.GREEN_PROJECTILE)
+    tank.loadCannon(TypesOfProjectile.GREEN_PROJECTILE)
     println()
     tank.shoot()
     println()
-
-    tank.load(TypesOfProjectile.RED_PROJECTILE)
+    tank.loadCannon(TypesOfProjectile.RED_PROJECTILE)
     println()
     tank.shoot()
 }
