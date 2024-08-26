@@ -8,22 +8,24 @@ class Robot {
         "Моя батарейка рассчитана на 120 лет",
         "У меня нейросетевой центральный процессор"
     )
+    private var modifier: ((String) -> String) = { it }
 
-    fun say(mod: ((String) -> String)? = null) {
+    fun say() {
         var text = robotPhrases.random()
-        if (mod != null)
-            text = mod(text)
+        text = modifier(text)
         println(text)
     }
 
-    fun setModifier(stringModifier: (String) -> String) = stringModifier
+    fun setModifier(mod: (String) -> String) {
+        this.modifier = mod
+    }
 }
 
 fun main() {
     val robot = Robot()
-    val reversedString: (String) -> String = { it.reversed() }
+    val reversedStringMod: (String) -> String = { it.reversed() }
 
     robot.say()
-    val reversedStringMod = robot.setModifier(reversedString)
-    robot.say(reversedStringMod)
+    robot.setModifier(reversedStringMod)
+    robot.say()
 }
