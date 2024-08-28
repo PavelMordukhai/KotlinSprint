@@ -20,13 +20,8 @@ fun main() {
         distanceFromEarth = 4.36
     )
 
-    val name = starSystem.component1()
-    val description = starSystem.component2()
-    val date = starSystem.component3()
-    val distance = starSystem.component4()
-
-    println("Звёздная система $name\n")
-    println("$description\n")
-    println("Возникла примерно $date\n")
-    println("Расстояние от Земли примерно $distance световых лет")
+    println("Звёздная система ${starSystem.component1()}\n")
+    println("${starSystem.component2()}\n")
+    println("Возникла примерно ${starSystem.component3()}\n")
+    println("Расстояние от Земли примерно ${starSystem.component4()} световых лет")
 }
